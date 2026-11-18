@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js" integrity="sha384-WyOxWvTyr1QaMPfiPJSv76iReVthorl5uWlFtZPyK0IEB0hGzo9y5Bp9mYanr8Bu" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <h2>PREPARA TU PRÓXIMO RETO</h2>
+
+                <h1>Título del juego 1</h1>
+
+                <h2>Lee las instrucciones y comienza tu partida</h2>
+
+                <button type="button" class="btn btn-outline-primary">
+                    Volver al Inicio
+                </button>
+
+            </div>
+        </div>
+    </div>
+</header>
+    <main>
+        <div class="container-fluid">
+            <div class="row my-3">
+                <div class="col-12 col-xl-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                              <!-- COLUMNA DE INFORMACIÓN -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header text-center">
+                                        <h4 class="mb-0"> Objetivo</h4>
+                                     </div>
+                                     <div class="card-body">
+                                        <ol>
+                                            <p> Consigue la mayor puntuación posible atravesando los obstáculos sin chocar.</p>
+                                        </ol>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="card shadow-sm mb-4">
+
+                                                        <div class="card-header text-center">
+                                                            <h4 class="mb-0">Reglas del juego</h4>
+                                                        </div>
+
+                                                        <div class="card-body">
+
+                                                            <ol>
+                                                                <li>Presiona INICIAR JUEGO para comenzar.</li>
+
+                                                                <li>Utiliza el botón ACELERAR para elevar al personaje.</li>
+
+                                                                <li>Evita chocar contra los obstáculos.</li>
+
+                                                                <li>Cada pareja de obstáculos superada suma un punto.</li>
+
+                                                                <li>Si chocas, la partida termina.</li>
+
+                                                            </ol>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="card shadow-sm">
+
+                                                        <div class="card-header text-center">
+                                                            <h4 class="mb-0">Instrucciones</h4>
+                                                        </div>
+
+                                                        <div class="card-body">
+
+                                                            <h5>Controles</h5>
+
+                                                            <p>
+                                                                <strong>INICIAR JUEGO:</strong>
+                                                                comienza la partida.
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>ACELERAR:</strong>
+                                                                impulsa al personaje hacia arriba.
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>REINICIAR:</strong>
+                                                                vuelve a la pantalla inicial.
+                                                            </p>
+                                                        </div>
+
+                                                    </div>      
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-xl-6">
+                    <div class="card">
+                        <div class="card-body text-center">Area de juego
+                                                                <div class="card-body text-center">
+
+                                                            <!-- AQUÍ SE GENERA EL CANVAS -->
+                                                            <div id="game-container"
+                                                                class="d-flex justify-content-center">
+                                                            </div>
+
+                                                            <!-- BOTONES -->
+                                                            <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+
+                                                                <button type="button"
+                                                                        class="btn btn-success"
+                                                                        onclick="iniciarJuego()">
+                                                                    INICIAR JUEGO
+                                                                </button>
+
+                                                                <button type="button"
+                                                                        class="btn btn-primary"
+                                                                        id="botonAcelerar"
+                                                                        onpointerdown="acelerar()"
+                                                                        onpointerup="detenerAceleracion()"
+                                                                        onpointerleave="detenerAceleracion()"
+                                                                        onpointercancel="detenerAceleracion()">
+                                                                    Saltar
+                                                                </button>
+
+                                                                <button type="button"
+                                                                        class="btn btn-danger"
+                                                                        onclick="reiniciarJuego()">
+                                                                    REINICIAR
+                                                                </button>
+
+                                                            </div>
+
+                                                            <p class="text-muted mt-3 mb-0">
+                                                                Presiona ACELERAR para mantenerte en el aire.
+                                                            </p>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </main>
+
+
+                                        <!-- JAVASCRIPT DEL JUEGO -->
+                                        <script>
+
+                                            // =====================================
+                                            // VARIABLES PRINCIPALES
+                                            // =====================================
+
+                                            var myGamePiece;
+                                            var myObstacles = [];
+                                            var myScore;
+
+                                            var score = 0;
+
+                                            var gameStarted = false;
+                                            var gameOver = false;
+
+
+                                            // =====================================
+                                            // CARGAR IMÁGENES
+                                            // =====================================
+
+                                            var playerImage = new Image();
+                                            playerImage.src = "imagenes/img1.png";
+
+                                            var obstacleTopImage = new Image();
+                                            obstacleTopImage.src = "imagenes/obstaculo-superior.png";
+
+                                            var obstacleBottomImage = new Image();
+                                            obstacleBottomImage.src = "imagenes/obstaculo-inferior.png";
+
+
+                                            // =====================================
+                                            // INICIAR JUEGO
+                                            // =====================================
+
+                                            function startGame() {
+
+                                                myGamePiece = new component(
+                                                    35, 35, "red", 50, 120,
+                                                    "image", playerImage
+                                                );
+
+                                                myGamePiece.gravity = 0.12;
+
+                                                myScore = new component(
+                                                    "25px", "Consolas", "black", 15, 30, "text"
+                                                );
+
+                                                myGameArea.start();
+                                            }
+
+
+                                            // =====================================
+                                            // ÁREA DEL JUEGO
+                                            // =====================================
+
+                                            var myGameArea = {
+
+                                                canvas: document.createElement("canvas"),
+
+                                                start: function() {
+
+                                                    this.canvas.width = 480;
+                                                    this.canvas.height = 270;
+
+                                                    this.context = this.canvas.getContext("2d");
+
+                                                    this.canvas.classList.add(
+                                                        "border",
+                                                        "border-dark",
+                                                        "rounded",
+                                                        "img-fluid"
+                                                    );
+
+                                                    document.getElementById("game-container")
+                                                        .appendChild(this.canvas);
+
+                                                    this.frameNo = 0;
+
+                                                    this.interval = setInterval(updateGameArea, 20);
+                                                },
+
+                                                clear: function() {
+
+                                                    this.context.clearRect(
+                                                        0, 0,
+                                                        this.canvas.width,
+                                                        this.canvas.height
+                                                    );
+                                                }
+                                            };
+
+
+                                            // =====================================
+                                            // COMPONENTES
+                                            // =====================================
+
+                                            function component(width, height, color, x, y, type, image) {
+
+                                                this.type = type;
+
+                                                this.width = width;
+                                                this.height = height;
+
+                                                this.x = x;
+                                                this.y = y;
+
+                                                this.gravity = 0;
+                                                this.gravitySpeed = 0;
+
+                                                this.image = image;
+
+                                                this.passed = false;
+
+                                                this.update = function() {
+
+                                                    var ctx = myGameArea.context;
+
+                                                    if (this.type == "text") {
+
+                                                        ctx.font = this.width + " " + this.height;
+
+                                                        ctx.fillStyle = color;
+
+                                                        ctx.fillText(this.text, this.x, this.y);
+
+                                                    } else if (this.type == "image") {
+
+                                                        if (this.image.complete &&
+                                                            this.image.naturalWidth > 0) {
+
+                                                            ctx.drawImage(
+                                                                this.image,
+                                                                this.x,
+                                                                this.y,
+                                                                this.width,
+                                                                this.height
+                                                            );
+
+                                                        } else {
+
+                                                            ctx.fillStyle = color;
+
+                                                            ctx.fillRect(
+                                                                this.x,
+                                                                this.y,
+                                                                this.width,
+                                                                this.height
+                                                            );
+                                                        }
+
+                                                    } else {
+
+                                                        ctx.fillStyle = color;
+
+                                                        ctx.fillRect(
+                                                            this.x,
+                                                            this.y,
+                                                            this.width,
+                                                            this.height
+                                                        );
+                                                    }
+                                                };
+
+
+                                                // MOVIMIENTO
+
+                                                this.newPos = function() {
+
+                                                    this.gravitySpeed += this.gravity;
+
+                                                    this.y += this.gravitySpeed;
+
+                                                    this.hitBottom();
+                                                };
+
+
+                                                // LÍMITES DEL CANVAS
+
+                                                this.hitBottom = function() {
+
+                                                    var rockbottom =
+                                                        myGameArea.canvas.height - this.height;
+
+                                                    if (this.y > rockbottom) {
+
+                                                        this.y = rockbottom;
+                                                        this.gravitySpeed = 0;
+                                                    }
+
+                                                    if (this.y < 0) {
+
+                                                        this.y = 0;
+                                                        this.gravitySpeed = 0;
+                                                    }
+                                                };
+
+
+                                                // DETECTAR COLISIONES
+
+                                                this.crashWith = function(otherobj) {
+
+                                                    var myleft = this.x;
+                                                    var myright = this.x + this.width;
+
+                                                    var mytop = this.y;
+                                                    var mybottom = this.y + this.height;
+
+                                                    var otherleft = otherobj.x;
+                                                    var otherright = otherobj.x + otherobj.width;
+
+                                                    var othertop = otherobj.y;
+                                                    var otherbottom = otherobj.y + otherobj.height;
+
+                                                    return !(
+                                                        mybottom < othertop ||
+                                                        mytop > otherbottom ||
+                                                        myright < otherleft ||
+                                                        myleft > otherright
+                                                    );
+                                                };
+
+                                            }
+
+
+                                            // =====================================
+                                            // PANTALLA INICIAL
+                                            // =====================================
+
+                                            function drawStartScreen() {
+
+                                                myGameArea.clear();
+
+                                                myGamePiece.update();
+
+                                                var ctx = myGameArea.context;
+
+                                                ctx.fillStyle = "black";
+
+                                                ctx.font = "25px Consolas";
+
+                                                ctx.textAlign = "center";
+
+                                                ctx.fillText(
+                                                    "PREPARADO PARA JUGAR",
+                                                    240,
+                                                    65
+                                                );
+
+                                                ctx.font = "17px Consolas";
+
+                                                ctx.fillText(
+                                                    "Presiona INICIAR JUEGO",
+                                                    240,
+                                                    220
+                                                );
+
+                                                ctx.textAlign = "left";
+                                            }
+
+
+                                            // =====================================
+                                            // ACTUALIZAR JUEGO
+                                            // =====================================
+
+                                            function updateGameArea() {
+
+                                                myGameArea.clear();
+
+                                                // ESPERAR HASTA INICIAR
+
+                                                if (!gameStarted && !gameOver) {
+
+                                                    drawStartScreen();
+
+                                                    return;
+                                                }
+
+
+                                                // COMPROBAR COLISIONES
+
+                                                if (!gameOver) {
+
+                                                    for (var i = 0; i < myObstacles.length; i++) {
+
+                                                        if (myGamePiece.crashWith(myObstacles[i])) {
+
+                                                            gameOver = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+
+
+                                                // GAME OVER
+
+                                                if (gameOver) {
+
+                                                    myObstacles.forEach(function(obstacle) {
+
+                                                        obstacle.update();
+
+                                                    });
+
+                                                    myGamePiece.update();
+
+                                                    var ctx = myGameArea.context;
+
+                                                    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+
+                                                    ctx.fillRect(0, 0, 480, 270);
+
+                                                    ctx.fillStyle = "white";
+
+                                                    ctx.textAlign = "center";
+
+                                                    ctx.font = "35px Consolas";
+
+                                                    ctx.fillText(
+                                                        "GAME OVER",
+                                                        240,
+                                                        110
+                                                    );
+
+                                                    ctx.font = "22px Consolas";
+
+                                                    ctx.fillText(
+                                                        "PUNTAJE: " + score,
+                                                        240,
+                                                        155
+                                                    );
+
+                                                    ctx.font = "15px Consolas";
+
+                                                    ctx.fillText(
+                                                        "Presiona REINICIAR",
+                                                        240,
+                                                        195
+                                                    );
+
+                                                    ctx.textAlign = "left";
+
+                                                    return;
+                                                }
+
+
+                                                // CONTADOR DE FOTOGRAMAS
+
+                                                myGameArea.frameNo += 1;
+
+
+                                                // GENERAR OBSTÁCULOS
+
+                                                if (
+                                                    myGameArea.frameNo == 1 ||
+                                                    everyinterval(110)
+                                                ) {
+
+                                                    var x = myGameArea.canvas.width;
+
+                                                    var minHeight = 20;
+                                                    var maxHeight = 140;
+
+                                                    var height = Math.floor(
+                                                        Math.random() *
+                                                        (maxHeight - minHeight + 1) +
+                                                        minHeight
+                                                    );
+
+                                                    var minGap = 95;
+                                                    var maxGap = 115;
+
+                                                    var gap = Math.floor(
+                                                        Math.random() *
+                                                        (maxGap - minGap + 1) +
+                                                        minGap
+                                                    );
+
+
+                                                    // OBSTÁCULO SUPERIOR
+
+                                                    var obstacleTop = new component(
+                                                        45,
+                                                        height,
+                                                        "green",
+                                                        x,
+                                                        0,
+                                                        "image",
+                                                        obstacleTopImage
+                                                    );
+
+                                                    myObstacles.push(obstacleTop);
+
+
+                                                    // OBSTÁCULO INFERIOR
+
+                                                    var obstacleBottom = new component(
+                                                        45,
+                                                        myGameArea.canvas.height - height - gap,
+                                                        "green",
+                                                        x,
+                                                        height + gap,
+                                                        "image",
+                                                        obstacleBottomImage
+                                                    );
+
+                                                    myObstacles.push(obstacleBottom);
+                                                }
+
+
+                                                // MOVER OBSTÁCULOS Y CONTAR PUNTOS
+
+                                                for (var i = 0; i < myObstacles.length; i++) {
+
+                                                    myObstacles[i].x -= 3;
+
+
+                                                    // SUMAR UN PUNTO AL SUPERAR LA PAREJA
+
+                                                    if (
+                                                        i % 2 == 0 &&
+                                                        !myObstacles[i].passed &&
+                                                        myObstacles[i].x + myObstacles[i].width
+                                                        < myGamePiece.x
+                                                    ) {
+
+                                                        myObstacles[i].passed = true;
+
+                                                        score++;
+                                                    }
+
+
+                                                    myObstacles[i].update();
+                                                }
+
+
+                                                // ELIMINAR OBSTÁCULOS QUE SALIERON DEL CANVAS
+
+                                                myObstacles = myObstacles.filter(function(obstacle) {
+
+                                                    return obstacle.x + obstacle.width > 0;
+
+                                                });
+
+
+                                                // ACTUALIZAR PUNTUACIÓN
+
+                                                myScore.text = "SCORE: " + score;
+
+                                                myScore.update();
+
+
+                                                // MOVIMIENTO DEL PERSONAJE
+
+                                                myGamePiece.newPos();
+
+                                                myGamePiece.update();
+
+                                            }
+
+
+                                            // =====================================
+                                            // FRECUENCIA DE OBSTÁCULOS
+                                            // =====================================
+
+                                            function everyinterval(n) {
+
+                                                return (myGameArea.frameNo / n) % 1 == 0;
+                                            }
+
+
+                                            // =====================================
+                                            // INICIAR PARTIDA
+                                            // =====================================
+
+                                            function iniciarJuego() {
+
+                                                if (gameOver || gameStarted) {
+                                                    return;
+                                                }
+
+                                                gameStarted = true;
+
+                                                myGamePiece.gravity = 0.12;
+
+                                                myGamePiece.gravitySpeed = 0;
+                                            }
+
+
+                                            // =====================================
+                                            // ACELERAR PERSONAJE
+                                            // =====================================
+
+                                            function acelerar() {
+
+                                                if (gameStarted && !gameOver) {
+
+                                                    myGamePiece.gravitySpeed = -3.5;
+                                                }
+                                            }
+
+
+                                            function detenerAceleracion() {
+
+                                                // La gravedad continúa actuando
+                                                // después de soltar el botón.
+                                            }
+
+
+                                            // =====================================
+                                            // REINICIAR JUEGO
+                                            // =====================================
+
+                                            function reiniciarJuego() {
+
+                                                gameStarted = false;
+
+                                                gameOver = false;
+
+                                                score = 0;
+
+                                                myObstacles = [];
+
+                                                myGameArea.frameNo = 0;
+
+                                                myGamePiece.x = 50;
+
+                                                myGamePiece.y = 120;
+
+                                                myGamePiece.gravity = 0;
+
+                                                myGamePiece.gravitySpeed = 0;
+
+                                                drawStartScreen();
+                                            }
+
+
+                                            // =====================================
+                                            // INICIAR AL CARGAR LA PÁGINA
+                                            // =====================================
+
+                                            window.onload = startGame;
+
+                                        </script>
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>
