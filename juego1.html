@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,10 +31,11 @@
         <div class="container-fluid">
             <div class="row my-3">
                 <div class="col-12 col-xl-6 text-center">
-                    <div class="card">
+                    <div class="card border border-info border-3 rounded-3">
                         <div class="card-body">
                               <!-- COLUMNA DE INFORMACIÓN -->
-                                <div class="card shadow-sm mb-4">
+                                <div class="card border border-info border-3 rounded-3">
+            
                                     <div class="card-header text-center">
                                         <h4 class="mb-0"> Objetivo</h4>
                                      </div>
@@ -43,11 +44,11 @@
                                             <p> Consigue la mayor puntuación posible atravesando los obstáculos sin chocar.</p>
                                         </ol>
 
-                                                        </div>
+                                    </div>
 
-                                                    </div>
+                                </div>
 
-                                                    <div class="card shadow-sm mb-4">
+                                                    <div class="card border border-info border-3 rounded-3">
 
                                                         <div class="card-header text-center">
                                                             <h4 class="mb-0">Reglas del juego</h4>
@@ -73,7 +74,7 @@
                                                     </div>
 
 
-                                                    <div class="card shadow-sm">
+                                                    <div class="card border border-info border-3 rounded-3">
 
                                                         <div class="card-header text-center">
                                                             <h4 class="mb-0">Instrucciones</h4>
@@ -105,7 +106,7 @@
                 </div>
 
                 <div class="col-12 col-xl-6">
-                    <div class="card">
+                    <div class="card border border-info border-3 rounded-3">
                         <div class="card-body text-center">Area de juego
                                                                 <div class="card-body text-center">
 
@@ -130,7 +131,7 @@
                                                                         onpointerup="detenerAceleracion()"
                                                                         onpointerleave="detenerAceleracion()"
                                                                         onpointercancel="detenerAceleracion()">
-                                                                    Saltar
+                                                                    SALTAR
                                                                 </button>
 
                                                                 <button type="button"
@@ -142,7 +143,7 @@
                                                             </div>
 
                                                             <p class="text-muted mt-3 mb-0">
-                                                                Presiona ACELERAR para mantenerte en el aire.
+                                                                Presiona SALTAR para mantenerte en el aire.
                                                             </p>
 
                                                         </div>
@@ -181,10 +182,10 @@
                                             playerImage.src = "imagenes/img1.png";
 
                                             var obstacleTopImage = new Image();
-                                            obstacleTopImage.src = "imagenes/obstaculo-superior.png";
+                                            obstacleTopImage.src = "imagenes/sus.png";
 
                                             var obstacleBottomImage = new Image();
-                                            obstacleBottomImage.src = "imagenes/obstaculo-inferior.png";
+                                            obstacleBottomImage.src = "imagenes/sus.png";
 
 
                                             // =====================================
@@ -287,13 +288,22 @@
                                                         if (this.image.complete &&
                                                             this.image.naturalWidth > 0) {
 
-                                                            ctx.drawImage(
-                                                                this.image,
-                                                                this.x,
-                                                                this.y,
-                                                                this.width,
-                                                                this.height
-                                                            );
+                                                                ctx.save();
+
+                                                                // Voltear horizontalmente la imagen
+                                                                ctx.translate(this.x + this.width, this.y);
+
+                                                                ctx.scale(-1, 1);
+
+                                                                ctx.drawImage(
+                                                                    this.image,
+                                                                    0,
+                                                                    0,
+                                                                    this.width,
+                                                                    this.height
+                                                                );
+
+                                                                ctx.restore();
 
                                                         } else {
 
