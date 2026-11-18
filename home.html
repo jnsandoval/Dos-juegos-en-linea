@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Gaming Hub</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-black text-white">
+
+    <!-- ENCABEZADO / NAVEGACIÓN -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-black py-3">
+            <div class="container">
+                <a class="navbar-brand font-monospace fw-bold text-uppercase d-flex align-items-center gap-3" href="#">
+                    <img src="img/imagen1.png" alt="Logo Retro Gaming Hub" width="46" height="32" class="object-fit-contain">
+                    <span>RETRO GAMING HUB</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="menuPrincipal">
+                    <ul class="navbar-nav gap-md-4 mt-3 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white fw-semibold border-bottom border-3 border-info pb-1 px-0" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-semibold px-0" href="juego1.html">Juego 1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-semibold px-0" href="juego2.html">Juego 2</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+
+        <!-- SECCIÓN 1: HERO / INICIO -->
+        <section class="card text-bg-dark border-0 rounded-0 position-relative overflow-hidden">
+            <img src="img/imagen2.png" class="card-img rounded-0 opacity-50 object-fit-cover" height="460" alt="Fondo control retro">
+
+            <!-- Decoraciones flotantes en las esquinas -->
+            <img src="img/imagen3.png" alt="" width="85" class="position-absolute top-0 start-0 m-4 d-none d-md-block object-fit-contain">
+            <img src="img/imagen4.png" alt="" width="70" class="position-absolute bottom-0 start-0 m-4 d-none d-md-block object-fit-contain">
+            <img src="img/imagen4.png" alt="" width="85" class="position-absolute top-0 end-0 m-4 d-none d-md-block object-fit-contain">
+            <img src="img/imagen3.png" alt="" width="85" class="position-absolute bottom-0 end-0 m-4 d-none d-md-block object-fit-contain">
+
+            <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center container">
+                <h1 class="display-4 font-monospace fw-bold text-uppercase text-white mb-2">RETRO GAMING HUB</h1>
+                <p class="h5 font-monospace fw-bold text-info text-uppercase mb-3">TU PRÓXIMA PARTIDA EMPIEZA AQUÍ</p>
+                <p class="fs-5 text-light mb-4">Dos juegos. Un solo lugar para divertirte.</p>
+                <a href="#elegir-juego" class="btn btn-light btn-lg font-monospace fw-bold text-uppercase px-4 py-3 rounded-1">
+                    ELEGIR JUEGO
+                </a>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CARDS DE JUEGOS Y PASOS -->
+        <section id="elegir-juego" class="container py-5">
+            <div class="d-flex align-items-center justify-content-center gap-3 mb-5">
+                <img src="img/imagen4.png" alt="" width="34" height="34" class="object-fit-contain">
+                <h2 class="h2 font-monospace fw-bold text-uppercase text-white text-center mb-0">ELIGE TU JUEGO</h2>
+                <img src="img/imagen4.png" alt="" width="34" height="34" class="object-fit-contain">
+            </div>
+
+            <!-- Dos Cards de Juegos -->
+            <div class="row justify-content-center g-4 mb-4">
+                <!-- Card Juego 1 -->
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="card bg-dark text-white border border-2 border-primary rounded-0 text-center h-100 p-4">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <img src="img/imagen5.png" alt="Icono Juego 1" width="90" height="64" class="object-fit-contain mb-3">
+                            <h3 class="h4 font-monospace fw-bold text-uppercase mb-3">JUEGO 1</h3>
+                            <p class="card-text text-light mb-4">Descubre el reto y comienza tu partida.</p>
+                            <a href="juego1.html" class="btn btn-light font-monospace fw-bold text-uppercase px-4 py-2 rounded-1 mt-auto">
+                                JUGAR AHORA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Juego 2 -->
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="card bg-dark text-white border border-2 border-primary rounded-0 text-center h-100 p-4">
+                        <div class="card-body d-flex flex-column align-items-center">
+                            <img src="img/imagen6.png" alt="Icono Juego 2" width="90" height="64" class="object-fit-contain mb-3">
+                            <h3 class="h4 font-monospace fw-bold text-uppercase mb-3">JUEGO 2</h3>
+                            <p class="card-text text-light mb-4">Descubre el reto y comienza tu partida.</p>
+                            <a href="juego2.html" class="btn btn-light font-monospace fw-bold text-uppercase px-4 py-2 rounded-1 mt-auto">
+                                JUGAR AHORA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Cajas de Pasos Separadas con Flechas -->
+            <div class="row justify-content-center mt-4 pt-2">
+                <div class="col-12 col-lg-10">
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+                        <div class="bg-dark border border-primary px-3 py-3 text-center w-100 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-controller fs-5"></i>
+                            <span>1. Elige un juego</span>
+                        </div>
+
+                        <i class="bi bi-chevron-right fs-4 text-secondary d-none d-md-block"></i>
+                        <i class="bi bi-chevron-down fs-4 text-secondary d-md-none"></i>
+
+                        <div class="bg-dark border border-primary px-3 py-3 text-center w-100 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-file-text fs-5"></i>
+                            <span>2. Lee las instrucciones</span>
+                        </div>
+
+                        <i class="bi bi-chevron-right fs-4 text-secondary d-none d-md-block"></i>
+                        <i class="bi bi-chevron-down fs-4 text-secondary d-md-none"></i>
+
+                        <div class="bg-dark border border-primary px-3 py-3 text-center w-100 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-play fs-4"></i>
+                            <span>3. Empieza a jugar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: NOVEDADES -->
+        <section class="bg-white text-dark py-5">
+            <div class="container py-3">
+                <div class="row align-items-center g-4">
+                    <div class="col-12 col-lg-6">
+                        <h2 class="display-6 font-monospace fw-bold text-uppercase mb-3">ENTÉRATE DE LAS NOVEDADES</h2>
+                        <p class="fs-5 mb-0">Déjanos tu correo para conocer nuevas actualizaciones.</p>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nombreInput" class="form-label fw-semibold small">Nombre</label>
+                                <input type="text" class="form-control" id="nombreInput" placeholder="Escribe tu nombre">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="correoInput" class="form-label fw-semibold small">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correoInput" placeholder="Escribe tu correo electrónico">
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-dark border-2 font-monospace fw-bold text-uppercase w-100 py-3 rounded-1 mb-2">
+                                QUIERO RECIBIR NOVEDADES
+                            </button>
+
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-2">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input" type="checkbox" id="aceptoCheck">
+                                    <label class="form-check-label small text-secondary" for="aceptoCheck">
+                                        Acepto recibir novedades por correo.
+                                    </label>
+                                </div>
+                                <small class="text-muted">Propuesta opcional de captación</small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-dark text-white text-center py-5 border-top border-2 border-primary">
+        <div class="container">
+            <p class="font-monospace fw-bold text-uppercase mb-2">RETRO GAMING HUB</p>
+            <p class="small text-white-50 mb-0">Proyecto de Programación Web · 2026</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
