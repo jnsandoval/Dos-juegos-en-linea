@@ -10,7 +10,9 @@
     <!-- No se utiliza CSS personalizado, ni <style>, ni atributos style="". -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+        rel="stylesheet"
+        integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX"
+        crossorigin="anonymous">
 </head>
 <body class="bg-black text-light">
 
@@ -19,7 +21,11 @@
         <nav class="navbar navbar-expand-md navbar-dark py-3" aria-label="Menú principal">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2 me-2" href="index.html">
-                    <span class="fs-2" aria-hidden="true">🎮</span>
+                    <!-- LOGO OFICIAL-->
+                    <img src="img/logo-oficial.png"
+                        width="60"
+                        height="60"
+                        alt="Logo de Retro Gaming Hub">
                     <span class="fw-bold font-monospace text-uppercase fs-6">RETRO GAMING HUB</span>
                 </a>
 
@@ -53,11 +59,11 @@
 
         <img src="img/fondo-hero.jpg" class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover opacity-50" alt="">
 
-        <div class="container position-relative text-center py-5">
-            <div class="py-4 py-md-5">
+        <div class="container position-relative text-center py-3 py-md-5">
+            <div class="py-2 py-md-5">
                 <p class="fw-bold text-info text-uppercase mb-3">UN NUEVO RETO TE ESPERA</p>
                 <h1 id="tituloJuego" class="display-3 fw-bold font-monospace text-uppercase mb-3">LA SERPIENTE</h1>
-                <p class="lead mb-4">Come los puntos, crece y evita chocar con las paredes o contigo mismo.</p>
+                <p class="lead mb-4">Come las manzanas, crece y evita chocar con las paredes o contigo mismo.</p>
                 <a class="btn btn-outline-info btn-lg fw-semibold" href="index.html">
                     <span aria-hidden="true">←</span> Volver al inicio
                 </a>
@@ -66,7 +72,7 @@
     </section>
 
     <!-- 3. CONTENIDO PRINCIPAL: PALETA AZUL OSCURO Y CIAN DE BOOTSTRAP -->
-    <main class="container py-4 py-lg-5">
+    <main class="container py-3 py-lg-5">
         <div class="row g-3 g-lg-4 align-items-stretch">
 
             <!-- COLUMNA IZQUIERDA: INSTRUCCIONES -->
@@ -80,7 +86,7 @@
 
                     <div class="py-3 border-bottom border-info border-opacity-25">
                         <h3 class="h6 fw-bold">01 / Objetivo</h3>
-                        <p class="mb-0 text-body-secondary">Come los puntos rojos para aumentar tu puntuación y hacer crecer la serpiente.</p>
+                        <p class="mb-0 text-body-secondary">Come las manzanas para aumentar tu puntuación y hacer crecer la serpiente.</p>
                     </div>
 
                     <div class="py-3 border-bottom border-info border-opacity-25">
@@ -90,10 +96,8 @@
 
                     <div class="py-3">
                         <h3 class="h6 fw-bold">03 / Controles</h3>
-                        <p class="mb-0 text-body-secondary">Usa las flechas del teclado o W, A, S, D. En móviles, utiliza los botones de dirección.</p>
+                        <p class="mb-0 text-body-secondary">En computadora, usa las flechas o W, A, S, D. Pulsa Espacio o P para pausar y continuar. En móviles, desliza sobre el tablero o despliega los botones de dirección.</p>
                     </div>
-
-                    <p class="text-info text-center small fw-semibold mt-4 mb-0">Presiona «Iniciar partida» para comenzar.</p>
                 </aside>
             </div>
 
@@ -106,9 +110,51 @@
                         <h2 id="tituloEstado" class="h5 fw-bold font-monospace text-uppercase mb-0">
                             ESTADO DE LA PARTIDA
                         </h2>
-                        <span id="estadoPartida" class="badge text-bg-info text-uppercase p-2">
+                        <span id="estadoPartida" class="badge text-bg-info text-uppercase p-2" role="status" aria-live="polite">
                             LISTO PARA JUGAR
                         </span>
+                    </div>
+
+                    <!-- ACCIONES PRINCIPALES: ACCESIBLES ANTES DEL TABLERO. -->
+                    <div class="p-3 border-bottom border-2 border-info border-opacity-25">
+                        <div class="row g-2">
+                            <div class="col-12 col-sm-6">
+                                <button id="btnIniciar" type="button"
+                                        class="btn btn-primary fw-bold text-uppercase w-100 py-2">
+                                    <!-- Ambos iconos mantienen el mismo tamaño y grosor. -->
+                                    <svg id="iconoPlay" xmlns="http://www.w3.org/2000/svg"
+                                         width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round"
+                                         class="me-2 align-middle" aria-hidden="true" focusable="false">
+                                        <polygon points="6 3 20 12 6 21 6 3"/>
+                                    </svg>
+                                    <svg id="iconoPause" xmlns="http://www.w3.org/2000/svg"
+                                         width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round"
+                                         class="me-2 align-middle d-none" aria-hidden="true" focusable="false">
+                                        <line x1="9" y1="4" x2="9" y2="20"/>
+                                        <line x1="15" y1="4" x2="15" y2="20"/>
+                                    </svg>
+                                    <span id="textoBotonPrincipal" class="align-middle">INICIAR PARTIDA</span>
+                                </button>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <button id="btnReiniciar" type="button"
+                                        class="btn btn-outline-info fw-bold text-uppercase w-100 py-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round"
+                                         class="me-2 align-middle" aria-hidden="true" focusable="false">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                        <path d="M3 3v5h5"/>
+                                    </svg>
+                                    <span class="align-middle">REINICIAR</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- TABLERO DEL JUEGO DE LA SERPIENTE. No requiere imágenes externas. -->
@@ -126,42 +172,63 @@
                             <canvas id="tableroSerpiente" width="360" height="360"
                                     class="img-fluid border border-3 border-info rounded-3 bg-dark"
                                     role="img"
-                                    aria-label="Tablero de 18 por 18 casillas para jugar a la serpiente">
+                                    aria-label="Tablero de 18 por 18 casillas para jugar a la serpiente"
+                                    aria-describedby="ayudaControles">
                                 Tu navegador no admite canvas.
                             </canvas>
 
-                            <p id="mensajeJuego" class="small text-body-secondary mt-3 mb-3" role="status">
+                            <!-- MENSAJE INFORMATIVO DEL JUEGO -->
+                            <p id="mensajeJuego"
+                            class="small text-body-secondary text-center mt-3 mb-3"
+                            role="status">
                                 Pulsa «Iniciar partida» para empezar.
                             </p>
 
-                            <!-- CONTROLES TÁCTILES: MANDO EN CRUZ CON BOTONES UNIFORMES. -->
-                            <div class="row justify-content-center mx-0" aria-label="Controles de dirección">
-                                <div class="col-11 col-sm-8 col-md-7 col-lg-8 col-xl-6">
-                                    <div class="d-flex flex-column gap-2">
-                                        <!-- Fila superior: botón centrado -->
-                                        <div class="row gx-2 justify-content-center">
-                                            <div class="col-4">
-                                                <button type="button"
-                                                        class="btn btn-outline-info rounded-3 fw-bold fs-4 w-100 py-2"
-                                                        data-direccion="arriba" aria-label="Mover arriba">↑</button>
-                                            </div>
-                                        </div>
-                                        <!-- Fila inferior: tres botones iguales -->
-                                        <div class="row gx-2">
-                                            <div class="col-4">
-                                                <button type="button"
-                                                        class="btn btn-outline-info rounded-3 fw-bold fs-4 w-100 py-2"
-                                                        data-direccion="izquierda" aria-label="Mover izquierda">←</button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button type="button"
-                                                        class="btn btn-outline-info rounded-3 fw-bold fs-4 w-100 py-2"
-                                                        data-direccion="abajo" aria-label="Mover abajo">↓</button>
-                                            </div>
-                                            <div class="col-4">
-                                                <button type="button"
-                                                        class="btn btn-outline-info rounded-3 fw-bold fs-4 w-100 py-2"
-                                                        data-direccion="derecha" aria-label="Mover derecha">→</button>
+                            <!-- ACCESIBILIDAD: ALTERNATIVA TÁCTIL A LOS GESTOS. -->
+                            <p id="ayudaControles" class="small text-info text-center mt-2 mb-2 d-lg-none">
+                                Desliza el dedo sobre el tablero o utiliza los botones de dirección.
+                            </p>
+
+                            <!-- Los botones no ocupan espacio mientras están contraídos. -->
+                            <div class="d-lg-none">
+                                <button type="button"
+                                        class="btn btn-outline-info btn-sm fw-semibold mb-3"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#controlesAlternativos"
+                                        aria-expanded="false"
+                                        aria-controls="controlesAlternativos">
+                                    Mostrar u ocultar controles de dirección
+                                </button>
+
+                                <div id="controlesAlternativos" class="collapse" role="group"
+                                     aria-label="Controles alternativos de la serpiente">
+                                    <div class="row justify-content-center mx-0 mb-2">
+                                        <div class="col-10 col-sm-7">
+                                            <div class="d-flex flex-column gap-2">
+                                                <div class="row gx-2 justify-content-center">
+                                                    <div class="col-4">
+                                                        <button type="button" data-direccion="arriba"
+                                                            class="btn btn-outline-info rounded-3 fw-bold fs-5 w-100 py-2"
+                                                            aria-label="Mover arriba">↑</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row gx-2">
+                                                    <div class="col-4">
+                                                        <button type="button" data-direccion="izquierda"
+                                                            class="btn btn-outline-info rounded-3 fw-bold fs-5 w-100 py-2"
+                                                            aria-label="Mover izquierda">←</button>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <button type="button" data-direccion="abajo"
+                                                            class="btn btn-outline-info rounded-3 fw-bold fs-5 w-100 py-2"
+                                                            aria-label="Mover abajo">↓</button>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <button type="button" data-direccion="derecha"
+                                                            class="btn btn-outline-info rounded-3 fw-bold fs-5 w-100 py-2"
+                                                            aria-label="Mover derecha">→</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -170,23 +237,6 @@
                         </div>
                     </div>
 
-                    <!-- BOTONES CONECTADOS AL JUEGO POR JAVASCRIPT. -->
-                    <div class="p-3 border-top border-2 border-info border-opacity-25">
-                        <div class="row g-2">
-                            <div class="col-12 col-sm-6">
-                                <button id="btnIniciar" type="button"
-                                        class="btn btn-primary fw-bold text-uppercase w-100 py-3">
-                                    INICIAR PARTIDA
-                                </button>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <button id="btnReiniciar" type="button"
-                                        class="btn btn-outline-info fw-bold text-uppercase w-100 py-3">
-                                    REINICIAR
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
         </div>
@@ -232,6 +282,95 @@
         </div>
     </footer>
 
+    <!-- MODAL: FIN DE PARTIDA -->
+    <div class="modal fade" id="modalGameOver"
+        tabindex="-1"
+        aria-labelledby="tituloGameOver"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light border border-info">
+
+                <!-- ENCABEZADO -->
+                <div class="modal-header border-secondary">
+                    <h2 class="modal-title fs-5 fw-bold text-info"
+                        id="tituloGameOver">
+                        🐍 FIN DE LA PARTIDA
+                    </h2>
+
+                    <button type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Cerrar">
+                    </button>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div class="modal-body text-center py-4">
+
+                    <h3 id="mensajeResultado"
+                        class="fw-bold text-danger mb-3">
+                        GAME OVER
+                    </h3>
+
+                    <p id="descripcionResultado"
+                        class="text-body-secondary mb-4">
+                        ¡La serpiente ha chocado!
+                    </p>
+
+                    <!-- PUNTUACIONES -->
+                    <div class="row g-3 mb-4">
+
+                        <div class="col-6">
+                            <div class="bg-black border border-secondary
+                                        rounded-3 p-3">
+                                <p class="small text-info mb-2">
+                                    PUNTUACIÓN
+                                </p>
+
+                                <span id="puntosFinales"
+                                    class="fs-2 fw-bold">
+                                    0
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="bg-black border border-secondary
+                                        rounded-3 p-3">
+                                <p class="small text-warning mb-2">
+                                    RÉCORD
+                                </p>
+
+                                <span id="recordFinal"
+                                    class="fs-2 fw-bold">
+                                    0
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- VOLVER A JUGAR DESDE EL MODAL -->
+                    <button type="button"
+                            id="btnVolverJugar"
+                            class="btn btn-primary fw-bold w-100 py-3">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="20" height="20" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             class="me-2 align-middle" aria-hidden="true" focusable="false">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                        <span class="align-middle">VOLVER A JUGAR</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- LÓGICA DEL JUEGO DE LA SERPIENTE: JavaScript propio, sin CSS adicional. -->
     <script>
         // 1. OBTENER LOS ELEMENTOS DEL HTML.
@@ -252,19 +391,32 @@
         let direccion = { x: 1, y: 0 };
         let siguienteDireccion = { x: 1, y: 0 };
         let puntos = 0;
+        // Cargar el récord guardado en este navegador; si no está disponible, usar 0.
         let record = 0;
+        try {
+            record = Math.max(0, Number(localStorage.getItem("retroGamingHubRecordSnake")) || 0);
+        } catch (error) {
+            record = 0;
+        }
         let jugando = false;
+        let pausado = false;
         let intervalo = null;
+        let cambioDireccionPendiente = false; // Evita dos giros dentro del mismo movimiento.
 
+        
         // 3. DIBUJAR EL TABLERO, LA SERPIENTE Y LA COMIDA.
         function dibujar() {
-            // Fondo y cuadrícula (se dibujan en canvas, NO con CSS).
+
+            // FONDO Y CUADRÍCULA.
             contexto.fillStyle = "#111827";
             contexto.fillRect(0, 0, canvas.width, canvas.height);
+
             contexto.strokeStyle = "#273449";
             contexto.lineWidth = 1;
+
             for (let i = 0; i <= cantidadCasillas; i++) {
                 const posicion = i * tamanoCasilla;
+
                 contexto.beginPath();
                 contexto.moveTo(posicion, 0);
                 contexto.lineTo(posicion, canvas.height);
@@ -273,28 +425,192 @@
                 contexto.stroke();
             }
 
-            // Comida.
-            contexto.fillStyle = "#ff4d6d";
+            // MANZANA: CUERPO, TALLO Y HOJA.
+            let centroManzanaX = comida.x * tamanoCasilla + tamanoCasilla / 2;
+            let centroManzanaY = comida.y * tamanoCasilla + tamanoCasilla / 2;
+            let radioManzana = tamanoCasilla / 2 - 3;
+
+            // Cuerpo de la manzana.
+            contexto.fillStyle = "#ef4444";
             contexto.beginPath();
-            contexto.arc(
-                comida.x * tamanoCasilla + tamanoCasilla / 2,
-                comida.y * tamanoCasilla + tamanoCasilla / 2,
-                tamanoCasilla / 2 - 3,
+
+            contexto.moveTo(
+                centroManzanaX,
+                centroManzanaY - radioManzana * 0.65
+            );
+
+            contexto.bezierCurveTo(
+                centroManzanaX - radioManzana * 0.35,
+                centroManzanaY - radioManzana * 1.1,
+                centroManzanaX - radioManzana * 1.15,
+                centroManzanaY - radioManzana * 1.05,
+                centroManzanaX - radioManzana,
+                centroManzanaY
+            );
+
+            contexto.bezierCurveTo(
+                centroManzanaX - radioManzana * 0.9,
+                centroManzanaY + radioManzana * 0.85,
+                centroManzanaX - radioManzana * 0.25,
+                centroManzanaY + radioManzana * 1.15,
+                centroManzanaX,
+                centroManzanaY + radioManzana * 0.83
+            );
+
+            contexto.bezierCurveTo(
+                centroManzanaX + radioManzana * 0.25,
+                centroManzanaY + radioManzana * 1.15,
+                centroManzanaX + radioManzana * 0.9,
+                centroManzanaY + radioManzana * 0.85,
+                centroManzanaX + radioManzana,
+                centroManzanaY
+            );
+
+            contexto.bezierCurveTo(
+                centroManzanaX + radioManzana * 1.15,
+                centroManzanaY - radioManzana * 1.05,
+                centroManzanaX + radioManzana * 0.35,
+                centroManzanaY - radioManzana * 1.1,
+                centroManzanaX,
+                centroManzanaY - radioManzana * 0.65
+            );
+
+            contexto.closePath();
+            contexto.fill();
+
+            // Tallo de la manzana.
+            contexto.strokeStyle = "#a16207";
+            contexto.lineWidth = 2;
+            contexto.beginPath();
+
+            contexto.moveTo(
+                centroManzanaX,
+                centroManzanaY - radioManzana * 0.7
+            );
+
+            contexto.lineTo(
+                centroManzanaX,
+                centroManzanaY - radioManzana * 1.2
+            );
+
+            contexto.stroke();
+
+            // Hoja de la manzana.
+            contexto.fillStyle = "#22c55e";
+            contexto.beginPath();
+
+            contexto.ellipse(
+                centroManzanaX + radioManzana * 0.35,
+                centroManzanaY - radioManzana,
+                radioManzana * 0.4,
+                radioManzana * 0.2,
+                -0.5,
                 0,
                 Math.PI * 2
             );
+
             contexto.fill();
 
-            // Cuerpo y cabeza.
-            serpiente.forEach(function(segmento, indice) {
-                contexto.fillStyle = indice === 0 ? "#67e8f9" : "#22c55e";
-                contexto.fillRect(
-                    segmento.x * tamanoCasilla + 2,
-                    segmento.y * tamanoCasilla + 2,
-                    tamanoCasilla - 4,
-                    tamanoCasilla - 4
+            // SERPIENTE: CUERPO CONTINUO Y CABEZA CON OJOS.
+            if (serpiente.length > 0) {
+
+                // DIBUJAR EL CUERPO CONECTADO.
+                contexto.beginPath();
+
+                let cola = serpiente[serpiente.length - 1];
+
+                contexto.moveTo(
+                    cola.x * tamanoCasilla + tamanoCasilla / 2,
+                    cola.y * tamanoCasilla + tamanoCasilla / 2
                 );
-            });
+
+                // Unir los segmentos desde la cola hasta la cabeza.
+                for (let i = serpiente.length - 2; i >= 0; i--) {
+                    contexto.lineTo(
+                        serpiente[i].x * tamanoCasilla + tamanoCasilla / 2,
+                        serpiente[i].y * tamanoCasilla + tamanoCasilla / 2
+                    );
+                }
+
+                contexto.strokeStyle = "#22c55e";
+                contexto.lineWidth = tamanoCasilla - 5;
+                contexto.lineCap = "round";
+                contexto.lineJoin = "round";
+                contexto.stroke();
+
+                // DIBUJAR LA CABEZA.
+                let cabeza = serpiente[0];
+
+                let centroX = cabeza.x * tamanoCasilla + tamanoCasilla / 2;
+                let centroY = cabeza.y * tamanoCasilla + tamanoCasilla / 2;
+                let radio = tamanoCasilla / 2 - 1;
+
+                contexto.fillStyle = "#67e8f9";
+                contexto.beginPath();
+                contexto.arc(centroX, centroY, radio, 0, Math.PI * 2);
+                contexto.fill();
+
+                // DETERMINAR LA DIRECCIÓN DE LA CABEZA.
+                let cuello = serpiente[1];
+
+                let direccionX = cuello ? cabeza.x - cuello.x : direccion.x;
+                let direccionY = cuello ? cabeza.y - cuello.y : direccion.y;
+
+                let ojos;
+
+                if (direccionX !== 0) {
+
+                    // Mirar a la derecha o izquierda.
+                    let lado = direccionX > 0 ? 1 : -1;
+
+                    ojos = [
+                        [centroX + radio * 0.35 * lado, centroY - radio * 0.4],
+                        [centroX + radio * 0.35 * lado, centroY + radio * 0.4]
+                    ];
+
+                } else {
+
+                    // Mirar arriba o abajo.
+                    let lado = direccionY > 0 ? 1 : -1;
+
+                    ojos = [
+                        [centroX - radio * 0.4, centroY + radio * 0.35 * lado],
+                        [centroX + radio * 0.4, centroY + radio * 0.35 * lado]
+                    ];
+                }
+
+                // DIBUJAR LOS DOS OJOS.
+                ojos.forEach(function(ojo) {
+
+                    // Parte blanca.
+                    contexto.fillStyle = "#ffffff";
+                    contexto.beginPath();
+
+                    contexto.arc(
+                        ojo[0],
+                        ojo[1],
+                        radio * 0.25,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    contexto.fill();
+
+                    // Pupila negra.
+                    contexto.fillStyle = "#111827";
+                    contexto.beginPath();
+
+                    contexto.arc(
+                        ojo[0] + direccionX * radio * 0.08,
+                        ojo[1] + direccionY * radio * 0.08,
+                        radio * 0.12,
+                        0,
+                        Math.PI * 2
+                    );
+
+                    contexto.fill();
+                });
+            }
         }
 
         // 4. COLOCAR LA COMIDA EN UNA CASILLA DESOCUPADA.
@@ -322,6 +638,9 @@
             clearInterval(intervalo);
             intervalo = null;
             jugando = false;
+            pausado = false;
+            cambioDireccionPendiente = false;
+            actualizarBotonPrincipal("INICIAR PARTIDA", false);
             puntos = 0;
             textoPuntuacion.textContent = puntos;
             textoRecord.textContent = record;
@@ -343,6 +662,7 @@
         // 6. AVANZAR UNA CASILLA Y COMPROBAR COLISIONES.
         function moverSerpiente() {
             direccion = siguienteDireccion;
+            cambioDireccionPendiente = false; // El siguiente giro ya se puede solicitar.
             const cabeza = {
                 x: serpiente[0].x + direccion.x,
                 y: serpiente[0].y + direccion.y
@@ -369,6 +689,12 @@
                 if (puntos > record) {
                     record = puntos;
                     textoRecord.textContent = record;
+                    // Mantener el récord tras recargar o cerrar la página.
+                    try {
+                        localStorage.setItem("retroGamingHubRecordSnake", String(record));
+                    } catch (error) {
+                        // Si el navegador bloquea el almacenamiento, se conserva solo en la sesión.
+                    }
                 }
                 if (!colocarComida()) {
                     dibujar();
@@ -380,32 +706,65 @@
             }
             dibujar();
         }
-
+        
+        
         // 7. FINALIZAR LA PARTIDA Y MOSTRAR EL RESULTADO.
         function terminarPartida(gano) {
             jugando = false;
+            pausado = false;
+            cambioDireccionPendiente = false;
             clearInterval(intervalo);
             intervalo = null;
+
+            // RESTABLECER EL BOTÓN PRINCIPAL.
+            actualizarBotonPrincipal("INICIAR PARTIDA", false);
+
             const mensaje = gano
                 ? "¡Ganaste! Llenaste todo el tablero. Puntos: " + puntos
                 : "Fin de la partida. Puntuación: " + puntos;
+
             estadoPartida.textContent = gano ? "¡VICTORIA!" : "FIN DE PARTIDA";
+
             estadoPartida.className = gano
                 ? "badge text-bg-success text-uppercase p-2"
                 : "badge text-bg-danger text-uppercase p-2";
+
             textoResultado.textContent = mensaje;
             mensajeJuego.textContent = "Pulsa «Iniciar partida» para jugar de nuevo.";
-            // Pequeño retraso para permitir que la pantalla se actualice antes del alert.
-            setTimeout(function() {
-                if (!jugando) {
-                    alert(mensaje);
-                }
-            }, 100);
+
+            // PERSONALIZAR EL MODAL SEGÚN EL RESULTADO.
+            const titulo = document.getElementById("mensajeResultado");
+            const descripcion = document.getElementById("descripcionResultado");
+
+            if (gano) {
+                titulo.textContent = "¡VICTORIA!";
+                titulo.className = "fw-bold text-success mb-3";
+
+                descripcion.textContent = "¡Increíble! Completaste todo el tablero.";
+            } else {
+                titulo.textContent = "GAME OVER";
+                titulo.className = "fw-bold text-danger mb-3";
+
+                descripcion.textContent = "¡La serpiente ha chocado!";
+            }
+
+            // ACTUALIZAR LA PUNTUACIÓN DEL MODAL.
+            document.getElementById("puntosFinales").textContent = puntos;
+            document.getElementById("recordFinal").textContent = record;
+
+            // MOSTRAR EL MODAL DE BOOTSTRAP.
+            const ventanaGameOver = bootstrap.Modal.getOrCreateInstance(
+                document.getElementById("modalGameOver")
+            );
+
+            ventanaGameOver.show();
         }
+
 
         // 8. CAMBIAR LA DIRECCIÓN SIN PERMITIR GIRAR 180 GRADOS.
         function cambiarDireccion(nuevaDireccion) {
-            if (!jugando) return;
+            if (!jugando || cambioDireccionPendiente) return;
+
             const opciones = {
                 arriba: { x: 0, y: -1 },
                 abajo: { x: 0, y: 1 },
@@ -413,32 +772,155 @@
                 derecha: { x: 1, y: 0 }
             };
             const nueva = opciones[nuevaDireccion];
-            if (nueva && (nueva.x !== -direccion.x || nueva.y !== -direccion.y)) {
-                siguienteDireccion = nueva;
-            }
+            if (!nueva) return;
+
+            // Ignorar la misma dirección y los giros de 180 grados.
+            const mismaDireccion = nueva.x === direccion.x && nueva.y === direccion.y;
+            const giroContrario = nueva.x === -direccion.x && nueva.y === -direccion.y;
+            if (mismaDireccion || giroContrario) return;
+
+            siguienteDireccion = nueva;
+            cambioDireccionPendiente = true;
         }
 
-        // 9. BOTONES: INICIAR Y REINICIAR.
+        // 9. BOTONES: INICIAR, PAUSAR, CONTINUAR Y REINICIAR.
+
+        // CAMBIAR SOLO EL TEXTO Y EL ICONO, SIN BORRAR LOS SVG DEL BOTÓN.
+        function actualizarBotonPrincipal(texto, mostrarPausa) {
+            document.getElementById("textoBotonPrincipal").textContent = texto;
+            document.getElementById("iconoPlay").classList.toggle("d-none", mostrarPausa);
+            document.getElementById("iconoPause").classList.toggle("d-none", !mostrarPausa);
+        }
+
+        // BOTÓN PRINCIPAL: INICIAR, PAUSAR O CONTINUAR.
         document.getElementById("btnIniciar").addEventListener("click", function() {
-            prepararPartida();
-            jugando = true;
-            estadoPartida.textContent = "JUGANDO";
-            estadoPartida.className = "badge text-bg-success text-uppercase p-2";
-            mensajeJuego.textContent = "¡A comer! Evita los obstáculos.";
-            textoResultado.textContent = "Partida en curso. Puntos: 0";
-            intervalo = setInterval(moverSerpiente, velocidad);
+
+            // SI ESTÁ JUGANDO, PAUSAR LA PARTIDA.
+            if (jugando) {
+                clearInterval(intervalo);
+                intervalo = null;
+
+                jugando = false;
+                pausado = true;
+
+                actualizarBotonPrincipal("CONTINUAR", false);
+                estadoPartida.textContent = "EN PAUSA";
+                estadoPartida.className = "badge text-bg-warning text-uppercase p-2";
+                mensajeJuego.textContent = "La partida está pausada.";
+            }
+
+            // SI ESTÁ PAUSADA, CONTINUAR DESDE LA MISMA POSICIÓN.
+            else if (pausado) {
+                jugando = true;
+                pausado = false;
+
+                actualizarBotonPrincipal("PAUSAR", true);
+                estadoPartida.textContent = "JUGANDO";
+                estadoPartida.className = "badge text-bg-success text-uppercase p-2";
+                mensajeJuego.textContent = "¡A comer! Evita los obstáculos.";
+
+                intervalo = setInterval(moverSerpiente, velocidad);
+            }
+
+            // SI NO HA COMENZADO, INICIAR UNA PARTIDA NUEVA.
+            else {
+                prepararPartida();
+
+                jugando = true;
+                pausado = false;
+                actualizarBotonPrincipal("PAUSAR", true);
+                estadoPartida.textContent = "JUGANDO";
+                estadoPartida.className = "badge text-bg-success text-uppercase p-2";
+                mensajeJuego.textContent = "¡A comer! Evita los obstáculos.";
+                textoResultado.textContent = "Partida en curso. Puntos: 0";
+
+                intervalo = setInterval(moverSerpiente, velocidad);
+            }
         });
 
-        document.getElementById("btnReiniciar").addEventListener("click", prepararPartida);
+        // REINICIAR Y COMENZAR UNA PARTIDA DESDE CERO.
+        document.getElementById("btnReiniciar").addEventListener("click", function() {
+            prepararPartida();
+            document.getElementById("btnIniciar").click();
+        });
 
-        // 10. CONTROLES TÁCTILES: LOS CUATRO BOTONES DE DIRECCIÓN.
+        // VOLVER A JUGAR DESDE EL MODAL.
+        document.getElementById("btnVolverJugar").addEventListener("click", function() {
+
+            const modal = document.getElementById("modalGameOver");
+
+            // Esperar a que el Modal termine de cerrarse.
+            modal.addEventListener("hidden.bs.modal", function() {
+                prepararPartida();
+                document.getElementById("btnIniciar").click();
+            }, { once: true });
+
+            // Cerrar la ventana flotante.
+            bootstrap.Modal.getOrCreateInstance(modal).hide();
+        });
+
+        // 10. CONTROLES TÁCTILES: DESLIZAR SOBRE EL TABLERO.
+        let inicioToque = null;
+        const distanciaMinima = 25; // Píxeles mínimos para reconocer un gesto.
+
+        // Guardar la posición inicial del dedo durante una partida.
+        canvas.addEventListener("touchstart", function(evento) {
+            if (!jugando || evento.touches.length !== 1) {
+                inicioToque = null;
+                return;
+            }
+
+            inicioToque = {
+                x: evento.touches[0].clientX,
+                y: evento.touches[0].clientY
+            };
+        }, { passive: true });
+
+        // Evitar que se desplace la página mientras se dirige la serpiente.
+        canvas.addEventListener("touchmove", function(evento) {
+            if (jugando && inicioToque !== null && evento.cancelable) {
+                evento.preventDefault();
+            }
+        }, { passive: false });
+
+        // Identificar la dirección principal del deslizamiento.
+        canvas.addEventListener("touchend", function(evento) {
+            if (!jugando || inicioToque === null || evento.changedTouches.length === 0) {
+                inicioToque = null;
+                return;
+            }
+
+            const finX = evento.changedTouches[0].clientX;
+            const finY = evento.changedTouches[0].clientY;
+            const diferenciaX = finX - inicioToque.x;
+            const diferenciaY = finY - inicioToque.y;
+            inicioToque = null;
+
+            // Ignorar toques accidentales o deslizamientos demasiado cortos.
+            if (Math.max(Math.abs(diferenciaX), Math.abs(diferenciaY)) < distanciaMinima) {
+                return;
+            }
+
+            if (Math.abs(diferenciaX) > Math.abs(diferenciaY)) {
+                cambiarDireccion(diferenciaX > 0 ? "derecha" : "izquierda");
+            } else {
+                cambiarDireccion(diferenciaY > 0 ? "abajo" : "arriba");
+            }
+        }, { passive: true });
+
+        // Cancelar un gesto interrumpido (llamada, notificación, etc.).
+        canvas.addEventListener("touchcancel", function() {
+            inicioToque = null;
+        }, { passive: true });
+
+        // 11. BOTONES DE DIRECCIÓN ALTERNATIVOS EN PANTALLAS TÁCTILES.
         document.querySelectorAll("[data-direccion]").forEach(function(boton) {
             boton.addEventListener("click", function() {
                 cambiarDireccion(boton.dataset.direccion);
             });
         });
 
-        // 11. CONTROLES DE TECLADO: FLECHAS Y W, A, S, D.
+        // 12. CONTROLES DE TECLADO: FLECHAS, W/A/S/D Y PAUSA CON ESPACIO O P.
         document.addEventListener("keydown", function(evento) {
             const teclas = {
                 ArrowUp: "arriba", w: "arriba", W: "arriba",
@@ -446,9 +928,27 @@
                 ArrowLeft: "izquierda", a: "izquierda", A: "izquierda",
                 ArrowRight: "derecha", d: "derecha", D: "derecha"
             };
+
             if (jugando && teclas[evento.key]) {
                 evento.preventDefault(); // Evita desplazar la página con las flechas.
                 cambiarDireccion(teclas[evento.key]);
+                return;
+            }
+
+            // Evitar interferir con campos de texto y con los controles del Modal.
+            const objetivo = evento.target instanceof Element ? evento.target : document.body;
+            const campoTexto = objetivo.matches("input, textarea, select, [contenteditable='true']");
+            const modalAbierto = document.getElementById("modalGameOver").classList.contains("show");
+            if (campoTexto || modalAbierto || evento.repeat || (!jugando && !pausado)) return;
+
+            const teclaP = evento.key.toLowerCase() === "p";
+            const espacio = evento.code === "Space" || evento.key === " ";
+            // En botones o enlaces, el espacio ya tiene su acción de teclado nativa.
+            const elementoInteractivo = objetivo.closest("button, a, [role='button']");
+
+            if (teclaP || (espacio && !elementoInteractivo)) {
+                evento.preventDefault();
+                document.getElementById("btnIniciar").click();
             }
         });
 
@@ -456,7 +956,15 @@
         prepararPartida();
     </script>
 
-    <!-- JAVASCRIPT OFICIAL DE BOOTSTRAP: solo para el menú desplegable. -->
+    <!-- PRUEBAS ANTES DE PUBLICAR:
+         1) Teclado: mover, pulsar dos direcciones antes de un movimiento, pausar con Espacio o P.
+         2) Móvil: deslizar, expandir flechas alternativas y comprobar el bloqueo de desplazamiento.
+         3) Perder: verificar Modal, puntuación y botón Volver a jugar.
+         4) Recargar: comprobar que el récord permanece guardado.
+         5) Victoria: revisar mediante prueba controlada antes de entrega.
+         6) Confirmar que img/fondo-hero.jpg y el logo oficial existen en la carpeta correspondiente.
+    -->
+    <!-- JAVASCRIPT OFICIAL DE BOOTSTRAP: menú desplegable, colapso y modal. -->
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-WyOxWvTyr1QaMPfiPJSv76iReVthorl5uWlFtZPyK0IEB0hGzo9y5Bp9mYanr8Bu"
